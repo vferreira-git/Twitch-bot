@@ -1,0 +1,157 @@
+﻿<Page x:Class="WpfApp1.Pages.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1.Pages"
+      mc:Ignorable="d" 
+      Title="General Settings:"
+      FontFamily="Heebo"
+      FontSize="15">
+
+    <ScrollViewer Background="#FF1F1F1F" Grid.Column="1" x:Name="grid_gsettings" Visibility="Visible" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <StackPanel >
+                <Label Content="Bot Settings" Foreground="#FFC1A8D6" FontWeight="Bold" FontSize="20"/>
+                <Border HorizontalAlignment="Stretch" Background="#FFC1A8D6" Height="1"/>
+
+                <DockPanel Margin="0,20,0,0">
+                    <Label Content="Bot Auth Token" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="DarkGray"/>
+                    <Button Style="{StaticResource AppButtonRound}" Content="Reset" Background="Red" Width="100" Height="35" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0" Click="Button_Click"/>
+                    <TextBox Style="{StaticResource AppTextBoxRound}" IsReadOnly="True" IsEnabled="False" HorizontalAlignment="Right" Width="200" x:Name="txtAuthToken" Grid.Column="1" Height="26" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+                    <Label Content="Channel Name:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="DarkGray"/>
+                    <TextBox Style="{StaticResource AppTextBoxRound}" x:Name="txtChannel" HorizontalAlignment="Right" Width="200" Height="26" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+                    <Label Content="StreamLabs Auth Token:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0" Foreground="DarkGray" Grid.Row="1"/>
+                    <TextBox Style="{StaticResource AppTextBoxRound}" x:Name="txtSLAuthToken" Width="200" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                </DockPanel>
+
+            </StackPanel>
+
+            <StackPanel Margin="0,10">
+                <Label Content="Preferences" Foreground="#FFC1A8D6" FontWeight="Bold" FontSize="20"/>
+                <Border HorizontalAlignment="Stretch" Background="#FFC1A8D6" Height="1"/>
+                <DockPanel Margin="0,20,0,0">
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="DarkGray" Text="Announce people joining"/>
+                    <CheckBox x:Name="checkJoining" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="DarkGray" Text="Announce people leaving" />
+                    <CheckBox x:Name="checkLeaving" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="DarkGray" Text="Thank followers in chat"/>
+                    <CheckBox x:Name="checkFollow" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="DarkGray" Text="Thank subscribers in chat"/>
+                    <CheckBox x:Name="checkSub" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Grid.Row="3"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="DarkGray" Text="Send whisper to giveaway winners" />
+                    <CheckBox x:Name="checkWhisperGiveaway" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="DarkGray" Text="Announce when user banned"/>
+                    <CheckBox x:Name="checkBan" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="DarkGray" Text="Announce when joined channel is hosting another channel/stops hosting another channel"/>
+                    <CheckBox x:Name="checkHostStart" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="DarkGray" Text="Auto whisper streamer codes on code giveaways:"/>
+                    <CheckBox x:Name="checkWhisperCode" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+                    <TextBlock TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="DarkGray" Text="Announce giveaway winners in chat:"/>
+                    <CheckBox x:Name="checkAnnounceGiveawayWinner" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                </DockPanel>
+            </StackPanel>
+
+            <StackPanel Margin="0,10">
+                <Label Content="Messages" Foreground="#FFC1A8D6" FontWeight="Bold" FontSize="20"/>
+                <Border HorizontalAlignment="Stretch" Background="#FFC1A8D6" Height="1"/>
+                <DockPanel Margin="0,20,0,0">
+                    <StackPanel>
+                        <TextBlock TextWrapping="Wrap" Text="User Joins" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="DarkGray"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label FontSize="12" Content="Preview:" VerticalAlignment="Center" Foreground="DarkGray" Margin="25,0,0,0" MaxWidth="350"/>
+                            <Label Name="lblUserJoins" FontSize="12" Content="{Binding ElementName=txtMessageJoin,Path=Text}" VerticalAlignment="Center" Foreground="LightYellow" Margin="0,0,0,0" MaxWidth="350"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <TextBox TextChanged="CheckStringArguments2" PreviewTextInput="CheckStringArguments" Width="200" Style="{StaticResource AppTextBoxRound}" x:Name="txtMessageJoin" HorizontalAlignment="Right" Margin="0,0,10,0" Height="26" VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+                    <StackPanel>
+                        <TextBlock TextWrapping="Wrap" Text="User Leaves" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="DarkGray"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label FontSize="12" Content="Preview:" VerticalAlignment="Center" Foreground="DarkGray" Margin="25,0,0,0" MaxWidth="350"/>
+                            <Label Name="lblUserLeaves" FontSize="12" VerticalAlignment="Center" Foreground="LightYellow" Margin="0,0,0,0" MaxWidth="350"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <TextBox TextChanged="CheckStringArguments2" PreviewTextInput="CheckStringArguments" Width="200" Style="{StaticResource AppTextBoxRound}" x:Name="txtMessageLeave" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+                    <StackPanel>
+                        <TextBlock TextWrapping="Wrap" Text="User Follows" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="DarkGray"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label FontSize="12" Content="Preview:" VerticalAlignment="Center" Foreground="DarkGray" Margin="25,0,0,0" MaxWidth="350"/>
+                            <Label Name="lblUserFollows" FontSize="12" Content="{Binding ElementName=txtMessageFollow,Path=Text}" ContentStringFormat="Viewer (Username) {0}" VerticalAlignment="Center" Foreground="LightYellow" Margin="0,0,0,0" MaxWidth="350"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <TextBox TextChanged="CheckStringArguments2" PreviewTextInput="CheckStringArguments" Width="200" Style="{StaticResource AppTextBoxRound}" x:Name="txtMessageFollow" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+                    <StackPanel>
+                        <TextBlock TextWrapping="Wrap" Text="User Subscribes" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="DarkGray"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label FontSize="12" Content="Preview:" VerticalAlignment="Center" Foreground="DarkGray" Margin="25,0,0,0" MaxWidth="350"/>
+                            <Label Name="lblUserSubscribes" FontSize="12" Content="{Binding ElementName=txtMessageSub,Path=Text}" ContentStringFormat="Viewer (Username) {0}" VerticalAlignment="Center" Foreground="LightYellow" Margin="0,0,0,0" MaxWidth="350"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <TextBox TextChanged="CheckStringArguments2" PreviewTextInput="CheckStringArguments" Width="200" Style="{StaticResource AppTextBoxRound}" x:Name="txtMessageSub" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+                    <StackPanel>
+                        <TextBlock TextWrapping="Wrap" Text="User Banned" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="DarkGray"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label FontSize="12" Content="Preview:" VerticalAlignment="Center" Foreground="DarkGray" Margin="25,0,0,0" MaxWidth="350"/>
+                            <Label Name="lblUserBanned" FontSize="12" Content="{Binding ElementName=txtMessageBan,Path=Text}" ContentStringFormat="Viewer (Username) {0}" VerticalAlignment="Center" Foreground="LightYellow" Margin="0,0,0,0" MaxWidth="350"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <TextBox TextChanged="CheckStringArguments2" PreviewTextInput="CheckStringArguments" Width="200" Style="{StaticResource AppTextBoxRound}" x:Name="txtMessageBan" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+                    <StackPanel>
+                        <TextBlock TextWrapping="Wrap" Text="Hosting another channel" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="DarkGray"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label FontSize="12" Content="Preview:" VerticalAlignment="Center" Foreground="DarkGray" Margin="25,0,0,0" MaxWidth="350"/>
+                            <Label Name="lblHosting" FontSize="12" Content="{Binding ElementName=txtMessageBan,Path=Text}" ContentStringFormat="Viewer (Username) {0}" VerticalAlignment="Center" Foreground="LightYellow" Margin="0,0,0,0" MaxWidth="350"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <TextBox TextChanged="CheckStringArguments2" PreviewTextInput="CheckStringArguments" Width="200" Style="{StaticResource AppTextBoxRound}" x:Name="txtMessageChannelHost" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                </DockPanel>
+            </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

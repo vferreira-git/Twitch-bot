@@ -1,0 +1,177 @@
+﻿<Page x:Class="WpfApp1.Pages.NewGiveaway"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="NewGiveaway" Background="#FF1F1F1F" FontSize="15">
+
+    <ScrollViewer x:Name="grid_gsettings" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <StackPanel>
+                <Label Content="New Giveaway" Foreground="#FFC1A8D6" FontWeight="Bold" FontSize="20"/>
+                <Border HorizontalAlignment="Stretch" Background="#FFC1A8D6" Height="1"/>
+
+                <DockPanel Margin="0,20,0,0">
+                    <TextBlock HorizontalAlignment="Left" Margin="5,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Center" Foreground="DarkGray"/>
+                    <TextBox Style="{StaticResource AppTextBoxRound}" Margin="0,0,10,0" x:Name="txtBoxName" HorizontalAlignment="Right" Height="26" Text="" VerticalAlignment="Center" Width="200"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+                    <TextBlock HorizontalAlignment="Left" Margin="5,0" Text="Giveaway Type" VerticalAlignment="Center" Foreground="DarkGray"/>
+                    <ComboBox x:Name="comboBoxGiveawayType" HorizontalAlignment="Right" Width="200" Height="26" Margin="0,0,10,0">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="Hashtag" Tag="0"/>
+                            <ComboBoxItem Content="Hashtag -> Followers Only" Tag="1"/>
+                            <ComboBoxItem Content="Followers" Tag="2"/>
+                            <ComboBoxItem Content="All Viewers" Tag="3"/>
+                        </ComboBox.Items>
+                    </ComboBox>
+                </DockPanel>
+
+                <DockPanel Margin="50,20,0,0">
+                    <DockPanel.Style>
+                        <Style>
+                            <Setter Property="DockPanel.Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=comboBoxGiveawayType, Path=SelectedIndex}" Value="0">
+                                    <Setter Property="DockPanel.Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=comboBoxGiveawayType, Path=SelectedIndex}" Value="1">
+                                    <Setter Property="DockPanel.Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DockPanel.Style>
+                    <TextBlock HorizontalAlignment="Left" Margin="5,0" TextWrapping="Wrap" Text="Hashtag" VerticalAlignment="Center" Foreground="DarkGray"/>
+                    <TextBox Style="{StaticResource AppTextBoxRound}" Margin="0,0,10,0" x:Name="txtBoxHashtag" HorizontalAlignment="Right" Height="26" Text="" VerticalAlignment="Center" Width="200"/>
+                </DockPanel>
+
+
+                <DockPanel Margin="0,20,0,0" Visibility="Visible">
+                    <TextBlock HorizontalAlignment="Left" Margin="5,0" Text="Reward Type" VerticalAlignment="Center"  Foreground="DarkGray"/>
+                    <ComboBox x:Name="comboBoxReward" HorizontalAlignment="Right" Width="200" Height="26" Margin="0,0,10,0">
+                        <ComboBox.Items>
+                            <ComboBoxItem x:Name="comboBoxItemCode" Content="Code" Tag="1"/>
+                            <ComboBoxItem x:Name="comboBoxItemCustom" Content="Custom" Tag="2"/>
+                        </ComboBox.Items>
+                    </ComboBox>
+
+                </DockPanel>
+
+                <DockPanel Margin="50,20,0,0">
+                    <DockPanel.Style>
+                        <Style>
+                            <Setter Property="DockPanel.Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=comboBoxItemCustom,Path=IsSelected}" Value="True">
+                                    <Setter Property="DockPanel.Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DockPanel.Style>
+                    <TextBlock HorizontalAlignment="Left" Margin="5,0" Text="Reward" VerticalAlignment="Center"  Foreground="DarkGray"/>
+                    <TextBox Style="{StaticResource AppTextBoxRound}" x:Name="txtBoxReward" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0" VerticalAlignment="Center" Width="200"/>
+                </DockPanel>
+
+                <DockPanel Margin="50,20,0,0">
+                    <DockPanel.Style>
+                        <Style>
+                            <Setter Property="DockPanel.Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=comboBoxItemCode,Path=IsSelected}" Value="True">
+                                    <Setter Property="DockPanel.Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DockPanel.Style>
+                    <TextBlock HorizontalAlignment="Left" Margin="5,0" Text="Auto pick code from list" VerticalAlignment="Center"  Foreground="DarkGray"/>
+                    <CheckBox x:Name="checkBoxPickCode" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <DockPanel Margin="100,20,0,0">
+                    <DockPanel.Style>
+                        <Style>
+                            <Setter Property="DockPanel.Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=checkBoxPickCode,Path=IsChecked}" Value="True">
+                                    <Setter Property="DockPanel.Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DockPanel.Style>
+                    <TextBlock HorizontalAlignment="Left" Margin="5,0" Text="Code" VerticalAlignment="Center"  Foreground="DarkGray"/>
+                    <TextBox Style="{StaticResource AppTextBoxRound}" x:Name="txtBoxCode" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0" VerticalAlignment="Center" Width="200"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+                    <TextBlock HorizontalAlignment="Left" Margin="5,0" Text="Announce Giveaway Start" VerticalAlignment="Center" Foreground="DarkGray"/>
+                    <CheckBox x:Name="checkBoxAnnounceStart" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+                    <TextBlock HorizontalAlignment="Left" Margin="5,0" TextWrapping="Wrap" Text="Repeat giveaway ( 0 to roll only once )" VerticalAlignment="Center" Foreground="DarkGray" Grid.Row="2" Grid.Column="0"/>
+                    <TextBox Style="{StaticResource AppTextBoxRound}" PreviewTextInput="NumberValidationTextBox" x:Name="txtBoxRepeat" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0" Text="0" VerticalAlignment="Center" Width="200"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+                    <TextBlock HorizontalAlignment="Left" Margin="5,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="DarkGray" Text="Delay between rolls ( if repeat is 0, delay until the giveaway rolls in seconds)"/>
+                    <TextBox Style="{StaticResource AppTextBoxRound}" PreviewTextInput="NumberValidationTextBox" x:Name="txtBoxDelay" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0" Text="600" VerticalAlignment="Center" Width="200"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,30,0,0">
+                    <TextBlock HorizontalAlignment="Left" Margin="5,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="DarkGray" Width="217" Text="Giveaway Winner Whisper Message ( Only works if enabled in General Settings )" Grid.Row="3" Grid.Column="0"/>
+                    <RichTextBox Style="{StaticResource AppRichTextBoxRound}" x:Name="richBoxWinnerWhisper" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Width="200" Height="75">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                </DockPanel>
+
+                <DockPanel Margin="0,30,0,0">
+                    <TextBlock HorizontalAlignment="Right" Margin="5,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="DarkGray"><Run Text="Giveaway Announce Winner Message"/><LineBreak/><Run Text="( Winner's name will be the first thing to appear in the message)"/></TextBlock>
+                    <RichTextBox Style="{StaticResource AppRichTextBoxRound}" HorizontalAlignment="Right" x:Name="richBoxGiveawayWinner" Margin="0,0,10,0" Width="200" Height="75" VerticalAlignment="Center">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                </DockPanel>
+
+                <DockPanel Margin="0,30,0,0">
+                    <TextBlock HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="DarkGray" Grid.Row="4" Grid.Column="0"><Run Text="Code Giveaway Whisper Message"/><LineBreak/><Run Text="Only works if enabled in General Settings )"/></TextBlock>
+                    <RichTextBox Style="{StaticResource AppRichTextBoxRound}" x:Name="richBoxCodeWhisper" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="200" Height="75">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                </DockPanel>
+
+                <DockPanel Margin="0,30,0,0">
+                    <TextBlock HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="DarkGray" Grid.Row="5" Grid.Column="0"><Run Text="Giveaway Announce Start Message"/><LineBreak/><Run Text="(Only works if "/><Run Text="setting is enabled"/><Run Text=")"/></TextBlock>
+                    <RichTextBox Style="{StaticResource AppRichTextBoxRound}" Width="200" Height="75" IsEnabled="{Binding IsChecked,ElementName=checkBoxAnnounceStart}" x:Name="richBoxGiveawayStart" Margin="0,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0" HorizontalAlignment="Center">
+                    <Button x:Name="btnCreateUpdate" Style="{StaticResource AppButtonRound}" Content="Create" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="35" BorderBrush="{x:Null}" Background="#FFFF900A" Foreground="White" Click="Button_Click"/>
+                </DockPanel>
+
+
+            </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

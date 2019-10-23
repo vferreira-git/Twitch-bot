@@ -1,0 +1,182 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="MainWindow" MinHeight="715" MinWidth="880" WindowState="Normal" Height="720" Width="1280" BorderBrush="#FF3F3F46" BorderThickness="1" WindowStyle="None" Background="#FF424057" ResizeMode="NoResize" Closing="Window_Closing"  >
+    <Window.Resources>
+        <Image x:Key="maximize" Source="/WpfApp1;component/Resources/Maximize.png"/>
+
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                            BorderThickness="0"
+                            Padding="0" 
+                            BorderBrush="DarkGray" 
+                            CornerRadius="0" 
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Button.Opacity" Value="0.5" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Button.Opacity" Value="0.85" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="MenuButtonStyle" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="0" 
+                            BorderBrush="Orange" 
+                            CornerRadius="0" 
+                            Background="{TemplateBinding Background}">
+                            <Label Content="{TemplateBinding Content}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Heebo"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.75" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="GridGiveawaysCells" TargetType="DataGridCell">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style x:Key="GridGiveawaysRows" TargetType="DataGridRow">
+            <Setter Property="BorderThickness" Value="0,0,0,3"/>
+            <Setter Property="BorderBrush" Value="#FFFFD059"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style x:Key="GridGiveawaysColumns" TargetType="DataGridColumnHeader">
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <Style x:Key="RectBorderStyle" TargetType="Rectangle">
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="Fill" Value="Transparent" />
+            <Setter Property="Tag" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
+            <EventSetter Event="MouseLeftButtonDown" Handler="Resize_Init"/>
+            <EventSetter Event="MouseLeftButtonUp" Handler="Resize_End"/>
+            <EventSetter Event="MouseMove" Handler="Resizeing_Form"/>
+        </Style>
+    </Window.Resources>
+
+
+
+    <Grid Background="#FF1F1F1F">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="57*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="160"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="header" HorizontalAlignment="Stretch" Height="50" VerticalAlignment="Top" MouseDown="header_MouseDown" Grid.ColumnSpan="2" Background="#FF191919" Grid.Row="0">
+            <Label Content="Pengus Bot" HorizontalAlignment="Left" Margin="49,12,0,0" VerticalAlignment="Top" Width="144" Foreground="#FFC1A8D6" FontSize="15" FontFamily="Heebo" Grid.ColumnSpan="2"/>
+            <Image HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="44" Source="/WpfApp1;component/Resources/Sem Título-1.png" Margin="5,4,0,0"/>
+            
+            <Button Style="{StaticResource ButtonStyle}" Click="CloseButtonClick" BorderThickness="0" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="25" Height="15">
+                <Button.Background>
+                    <ImageBrush ImageSource="/WpfApp1;component/Resources/Close.png"/>
+                </Button.Background>
+            </Button>
+            <Button Style="{StaticResource ButtonStyle}" x:Name="btnMaximize" Click="MaxMinButtonClick" BorderThickness="0" HorizontalAlignment="Right" Margin="0,10,49,0" VerticalAlignment="Top" Width="25" Height="15">
+                <Button.Background>
+                    <ImageBrush ImageSource="/WpfApp1;component/Resources/Maximize.png"/>
+                </Button.Background>
+            </Button>
+            <Button Style="{StaticResource ButtonStyle}" Click="MinimizeButtonClick" BorderThickness="0" HorizontalAlignment="Right" Margin="0,10,89,0" VerticalAlignment="Top" Width="25" Height="15">
+                <Button.Background>
+                    <ImageBrush ImageSource="/WpfApp1;component/Resources/Minimize.png"/>
+                </Button.Background>
+            </Button>
+        </Grid>
+
+        <Rectangle x:Name="leftSizeGrip"
+            Width="7"
+            HorizontalAlignment="Left"
+            Cursor="SizeWE"
+            Style="{StaticResource RectBorderStyle}" Grid.RowSpan="2" />
+        <Rectangle x:Name="rightSizeGrip"
+            Width="7"
+            HorizontalAlignment="Right"
+            Cursor="SizeWE"
+            Style="{StaticResource RectBorderStyle}" Grid.RowSpan="2" Grid.Column="1" />
+        <Rectangle x:Name="topSizeGrip"
+            Height="7"
+            VerticalAlignment="Top"
+            Cursor="SizeNS"
+            Style="{StaticResource RectBorderStyle}" Grid.ColumnSpan="2" />
+        <Rectangle x:Name="bottomSizeGrip"
+            Height="7"
+            VerticalAlignment="Bottom"
+            Cursor="SizeNS"
+            Style="{StaticResource RectBorderStyle}" Grid.Row="1" Grid.ColumnSpan="2" />
+        <!--  Corners  -->
+        <Rectangle Name="topLeftSizeGrip"
+            Width="7"
+            Height="7"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Cursor="SizeNWSE"
+            Style="{StaticResource RectBorderStyle}" />
+        <Rectangle Name="bottomRightSizeGrip"
+            Width="7"
+            Height="7"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Cursor="SizeNWSE"
+            Style="{StaticResource RectBorderStyle}" Grid.Row="1" Grid.Column="1" />
+        <Rectangle Name="topRightSizeGrip"
+            Width="7"
+            Height="7"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Cursor="SizeNESW"
+            Style="{StaticResource RectBorderStyle}" Grid.Column="1" />
+        <Rectangle Name="bottomLeftSizeGrip"
+            Width="7"
+            Height="7"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Cursor="SizeNESW"
+            Style="{StaticResource RectBorderStyle}" Grid.Row="1" />
+
+
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Background="#FF191919">
+
+
+            <Button Content="Home" Style="{StaticResource MenuButtonStyle}" x:Name="btnHome" Click="btnHome_Click" HorizontalAlignment="Center" Margin="0,5" VerticalAlignment="Top" Width="157" Height="44" Background="{x:Null}" Foreground="White" FontSize="17" BorderBrush="{x:Null}" FontFamily="Heebo" />
+            <Button Content="Giveaways" Style="{StaticResource MenuButtonStyle}" x:Name="btnGiv" Click="btnGiv_Click" HorizontalAlignment="Left" Margin="0,5" VerticalAlignment="Top" Width="157" Height="43" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FF1F1F1F" FontSize="17" FontFamily="Heebo"/>
+            <Button Content="Codes" Style="{StaticResource MenuButtonStyle}" x:Name="btnCodes" Click="btnCodes_Click" HorizontalAlignment="Left" Margin="0,5" VerticalAlignment="Top" Width="157" Height="43" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FF1F1F1F" FontSize="17" FontFamily="Heebo"/>
+            <Button Content="Settings" Style="{StaticResource MenuButtonStyle}" x:Name="btnGs" Click="btnGs_Click" HorizontalAlignment="Center" Margin="0,5" VerticalAlignment="Top" Width="157" Height="44" Background="{x:Null}" Foreground="White" FontSize="17" BorderBrush="{x:Null}" FontFamily="Heebo" />
+        </StackPanel>
+
+        <Frame x:Name="NavigationContainer" NavigationUIVisibility="Hidden" Margin="0,0,5,5" Grid.Column="1" Grid.Row="1">
+
+        </Frame>
+
+    </Grid>
+</Window>
